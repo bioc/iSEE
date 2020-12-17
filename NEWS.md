@@ -1,3 +1,7 @@
+# iSEE 2.2.2
+
+* Fix wiring of button observer to open vignette.
+
 # iSEE 2.2.1
 
 * Bugfix to the heatmap color selection for near-zero length ranges.
