@@ -1,3 +1,7 @@
+# iSEE 2.2.3
+
+* Bugfix for missing import of geom_density_2d
+
 # iSEE 2.2.2
 
 * Fix wiring of button observer to open vignette.
