@@ -1,3 +1,8 @@
+# iSEE 2.15.1
+
+* Add button 'Draft out a tour' to navigation bar.
+* Add button 'About this data set' to navigation bar.
+
 # iSEE 2.13.5
 
 * Add generic `.isBrushable` to support panels that are not `DotPlot` extensions.
@@ -274,7 +279,7 @@
 
 # iSEE 2.1.7
 
-* Added control of legend point size under the "Text" category of teh "Visual parameters" box.
+* Added control of legend point size under the "Text" category of the "Visual parameters" box.
 
 # iSEE 2.1.6
 
@@ -337,7 +342,7 @@
 
 # iSEE 1.99.3
 
-* Fixed occurences of `rowData` in `RowDotPlot` panels.
+* Fixed occurrences of `rowData` in `RowDotPlot` panels.
 * Refactored `.create_visual_box()`.
 * Refactored visual parameter sections into generics.
 * Apply global option `selected.color` to single selections.
@@ -601,7 +606,7 @@
 * Added grid-based visual point downsampling for faster plotting, including control of resolution.
 * Added button "Clear features" for heat maps.
 * Reorganized buttons in heat map panels.
-* Transfered maintainer badge to Federico.
+* Transferred maintainer badge to Federico.
 
 # iSEE 0.99.0
 
