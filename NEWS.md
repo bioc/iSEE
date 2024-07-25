@@ -1,3 +1,7 @@
+# iSEE 2.17.3
+
+* Preserve the existing order of rows when receiving a selection in `RowDataTable`, `ColumnDataTable` panels.
+
 # iSEE 2.17.2
 
 * Export function `.selectInputHidden()`.
