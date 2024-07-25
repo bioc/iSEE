@@ -1,3 +1,7 @@
+# iSEE 2.17.2
+
+* Export function `.selectInputHidden()`.
+
 # iSEE 2.17.1
 
 * Fix typo in `setMethod(".getContinuousMetadataChoices", "RowDotPlot", ...)`.
