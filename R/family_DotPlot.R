@@ -99,6 +99,18 @@
 #' \item \code{ContourColor}, string specifying the color to use for the contour lines.
 #' Defaults to \code{"blue"}.
 #' }
+#' 
+#' The following slot controls whether the aspect ratio is fixed to 1 or not:
+#' \itemize{
+#' \item \code{FixAspectRatio}, logical scalar indicating whether the aspect ratio of a scatter plot should be fixed to 1. 
+#' Defaults to \code{FALSE}.
+#' }
+#'
+#' The following slot controls whether the violin boundaries are plotted or not:
+#' \itemize{
+#' \item \code{ViolinAdd}, logical scalar indicating whether the violin boundaries should be plotted. 
+#' Defaults to \code{TRUE}.
+#' }
 #'
 #' The following slots control the general appearance of the points.
 #' \itemize{
@@ -279,7 +291,11 @@ setMethod("initialize", "DotPlot", function(.Object, ...) {
 
     args <- .emptyDefault(args, .contourAdd, FALSE)
     args <- .emptyDefault(args, .contourColor, getPanelDefault(.contourColor))
+    
+    args <- .emptyDefault(args, .fixAspectRatio, FALSE)
 
+    args <- .emptyDefault(args, .violinAdd, TRUE)
+    
     args <- .emptyDefault(args, .plotPointSize, getPanelDefault(.plotPointSize))
     args <- .emptyDefault(args, .plotPointAlpha, getPanelDefault(.plotPointAlpha))
     args <- .emptyDefault(args, .plotPointDownsample, getPanelDefault(.plotPointDownsample))
@@ -307,7 +323,7 @@ setValidity2("DotPlot", function(object) {
     msg <- .validLogicalError(msg, object,
         c(.plotCustomLabels, .visualParamBoxOpen, .contourAdd, .plotPointDownsample,
             .plotHoverInfo,
-            .plotLabelCenters
+            .plotLabelCenters, .fixAspectRatio, .violinAdd
         ))
 
     msg <- .singleStringError(msg, object,
@@ -469,7 +485,7 @@ setMethod(".createObservers", "DotPlot", function(x, se, input, session, pObject
             .shapeByField, .sizeByField,
             .plotPointSize, .plotPointAlpha, .plotFontSize, .legendPointSize, .plotLegendPosition,
             .plotPointDownsample, .plotPointSampleRes, .contourAdd,
-            .contourColor, .plotCustomLabels, .plotHoverInfo,
+            .contourColor, .fixAspectRatio, .violinAdd, .plotCustomLabels, .plotHoverInfo,
             .plotLabelCenters, .plotLabelCentersBy, .plotLabelCentersColor),
         input=input, pObjects=pObjects, rObjects=rObjects)
 
@@ -771,6 +787,30 @@ setMethod(".defineVisualPointInterface", "DotPlot", function(x, se) {
             )
         )
     })
+    
+    .addSpecificTour(class(x)[1], .fixAspectRatio, function(plot_name) {
+        data.frame(
+            rbind(
+                c(
+                    element=paste0("#", plot_name, "_", .fixAspectRatio),
+                    intro="For scatter plots, we can fix the aspect ratio to 1 by checking this box.
+                    For all other plots, this has no effect."
+                )
+            )
+        )
+    })
+    
+    .addSpecificTour(class(x)[1], .violinAdd, function(plot_name) {
+        data.frame(
+            rbind(
+                c(
+                    element=paste0("#", plot_name, "_", .violinAdd),
+                    intro="For violin plots, we can decide whether the violin boundaries should be plotted or not.
+                    For all other plots, this has no effect."
+                )
+            )
+        )
+    })
 
     tagList(
         hr(),
@@ -794,7 +834,13 @@ setMethod(".defineVisualPointInterface", "DotPlot", function(x, se) {
             on_select=TRUE,
             colourInput(
                 paste0(plot_name, "_", .contourColor), label=NULL,
-                value=slot(x, .contourColor)))
+                value=slot(x, .contourColor))),
+        .checkboxInput.iSEE(x, .fixAspectRatio,
+                            label="Fix aspect ratio to 1 (scatter only)",
+                            value=slot(x, .fixAspectRatio)),
+        .checkboxInput.iSEE(x, .violinAdd,
+                            label="Display violin boundaries (violin only)",
+                            value=slot(x, .violinAdd))
     )
 })
 
