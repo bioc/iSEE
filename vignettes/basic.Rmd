@@ -57,10 +57,6 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 SCREENSHOT <- function(x, ...) knitr::include_graphics(x, dpi = NA)
 ```
 
-```{r, echo=FALSE, out.width='50%', fig.align='center'}
-knitr::include_graphics(path = system.file(package="iSEE", "www/iSEE.png", mustWork=TRUE))
-```
-
 # Introduction 
 
 `r Biocpkg("iSEE")` is a [Bioconductor](http://bioconductor.org) package that provides an interactive Shiny-based graphical user interface for exploring data stored in `SummarizedExperiment` objects [@kra2018iSEE].
@@ -152,9 +148,7 @@ The `runApp` function launches the app in our browser.
 shiny::runApp(app)
 ```
 
-```{r, echo=FALSE}
-SCREENSHOT("screenshots/basic-demo.png")
-```
+![Basic demo.](basic-demo.png)
 
 By default, the app starts with a dashboard that contains one panel or table of each type.
 By opening the collapsible panels named "Data parameters", "Visual parameters", and "Selection parameters" under each plot, we can control the content and appearance of each panel.
